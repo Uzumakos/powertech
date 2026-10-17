@@ -1,0 +1,147 @@
+@import "tailwindcss";
+
+/* Design tokens — see docs/DESIGN.md */
+@theme {
+  --color-paper: #ffffff;
+  --color-mist: #f8fafc;
+  --color-line: #e2e8f0;
+  --color-ink: #0f172a;
+  --color-muted: #475569;
+  --color-crimson: #9e1b1e;
+  --color-crimson-deep: #7d1518;
+  --color-volt: #ffd100;
+  --color-volt-deep: #f2c200;
+  --color-night: #0b0f19;
+  --color-night-2: #151c2c;
+  --color-night-line: #263049;
+
+  --font-sans: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
+
+  --radius-frame: 28px;
+  --radius-card: 16px;
+  --radius-field: 10px;
+
+  --shadow-float: 0 1px 2px rgb(15 23 42 / 0.06), 0 12px 32px -12px rgb(15 23 42 / 0.22);
+
+  /* Rows set their own animation-duration inline, based on their length. */
+  --animate-marquee: marquee 40s linear infinite;
+  --animate-marquee-reverse: marquee 40s linear infinite reverse;
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+}
+
+/* Archivo's width axis: the expanded cut is the brand's display voice. */
+@utility wide {
+  font-variation-settings: "wdth" 125;
+}
+@utility condensed {
+  font-variation-settings: "wdth" 100;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-padding-top: 6rem;
+  }
+  body {
+    background: var(--color-mist);
+    color: var(--color-muted);
+    font-family: var(--font-sans);
+    text-rendering: optimizeLegibility;
+  }
+  h1, h2, h3, h4 {
+    color: var(--color-ink);
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-crimson);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+  .on-dark :focus-visible {
+    outline-color: var(--color-volt);
+  }
+}
+
+@layer components {
+  /* Page container: 16px gutters on phones, max 1440px on wide screens. */
+  .shell {
+    width: 100%;
+    max-width: 1440px;
+    margin-inline: auto;
+    padding-inline: 1rem;
+  }
+  @media (min-width: 640px) {
+    .shell { padding-inline: 1.5rem; }
+  }
+  @media (min-width: 1024px) {
+    .shell { padding-inline: 2rem; }
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 2.75rem;
+    padding-inline: 1.25rem;
+    border-radius: 9999px;
+    font-weight: 600;
+    font-size: 0.9375rem;
+    line-height: 1.15;
+    text-align: center;
+    /* Long labels wrap on the narrowest phones instead of overflowing. */
+    padding-block: 0.625rem;
+    transition: background-color 150ms, border-color 150ms, color 150ms;
+  }
+  @media (min-width: 640px) {
+    .btn-lg { min-height: 3.25rem; padding-inline: 1.625rem; font-size: 1rem; }
+  }
+  .btn-volt {
+    background: var(--color-volt);
+    color: var(--color-ink);
+  }
+  .btn-volt:hover {
+    background: var(--color-volt-deep);
+  }
+  .btn-outline {
+    background: var(--color-paper);
+    color: var(--color-ink);
+    border: 1.5px solid var(--color-crimson);
+  }
+  .btn-outline:hover {
+    background: #fdf3f3;
+  }
+}
+
+/* About page timeline: milestones rise in as they enter the viewport. */
+.timeline-reveal {
+  transition: opacity 700ms cubic-bezier(0.2, 0.7, 0.2, 1), transform 700ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+[data-pending] > .timeline-reveal {
+  opacity: 0;
+  transform: translateY(28px);
+}
+
+/* One orchestrated entrance for the hero; nothing else animates on load. */
+@media (prefers-reduced-motion: no-preference) {
+  .hero-photo { animation: hero-photo 1.8s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+  .hero-word { animation: hero-rise 1.2s 0.15s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+  .hero-copy { animation: hero-rise 0.9s 0.45s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+  .hero-stats { animation: hero-rise 0.9s 0.65s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+
+  @keyframes hero-photo {
+    from { transform: scale(1.08); }
+    to { transform: scale(1); }
+  }
+  @keyframes hero-rise {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+}
