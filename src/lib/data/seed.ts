@@ -16,8 +16,8 @@ const spec = (key: string, fr: string, en: string, value: SpecText, unit?: SpecT
 export const seedSettings: SiteSettingsRecord = {
   companyName: "Powertech Services S.A.",
   foundedYear: 1993,
-  phone: "+509 2816 3300",
-  whatsapp: "+509 2816 3300",
+  phone: "+509 2816 0422",
+  whatsapp: "+509 2816 0422",
   email: "contact@powertech.example",
   notificationEmail: null,
   address: { fr: "Port-au-Prince, Haïti", en: "Port-au-Prince, Haiti" },

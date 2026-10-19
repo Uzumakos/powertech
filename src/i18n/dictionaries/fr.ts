@@ -155,7 +155,7 @@ const fr = {
     errors: {
       summary: "Vérifiez les champs signalés.",
       required: "Ce champ est obligatoire.",
-      phone: "Entrez un numéro valide, par exemple +509 2816 3300.",
+      phone: "Entrez un numéro valide, par exemple +509 2816 0422.",
       email: "Entrez une adresse e-mail valide.",
       emailForPref: "Indiquez votre e-mail pour être recontacté par e-mail.",
       org: "Choisissez le type d'organisation.",

@@ -156,7 +156,7 @@ const en: Dictionary = {
     errors: {
       summary: "Check the highlighted fields.",
       required: "This field is required.",
-      phone: "Enter a valid number, for example +509 2816 3300.",
+      phone: "Enter a valid number, for example +509 2816 0422.",
       email: "Enter a valid email address.",
       emailForPref: "Enter your email so we can reply by email.",
       org: "Choose your type of organization.",
